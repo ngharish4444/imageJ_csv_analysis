@@ -25,7 +25,7 @@ nam =['gr_0.79','gr_12.57','gr_38.48','gr_95.03','gr_176.71','gr_314.16','gr_490
 
 
 
-def df_creating():
+def df_creating(): #initial data frame creation from csv files
     x = [i for i in range(y)]
     path =r''
     #path can also be defined but we paste it in folder
@@ -57,7 +57,7 @@ def df_creating():
 
 
 
-def df_particle_group():
+def df_particle_group(): #grouping each particle according to size
     global df_grouped,df_grouped2,nam
     df_grouped = pd.DataFrame()
     nam =['gr_0.79','gr_12.57','gr_38.48','gr_95.03','gr_176.71','gr_314.16','gr_490.87','gr_1452.2','gr_101787.6']
@@ -121,7 +121,7 @@ def df_particle_group():
 
 
 
-def group_sort_in_order():
+def group_sort_in_order(): #sorting of order as image from microscope movement
     zz= int(9*row_tot)
     new_index = range(zz)
     global t_df
@@ -186,7 +186,7 @@ def print_factors(x):
 
 
 
-def row_del():
+def row_del():#rows deleted incase bad images are in the dataset
     global mean_el,tp_df
     tp_df =t_df
     rep = input('\nDo u want to delete some images (y/n): ')
@@ -215,7 +215,7 @@ def row_del():
     return
 
 
-def group_mean_byrow():
+def group_mean_byrow():#group mean the data as 10x10 block pixels
     jk=0
     app = []
     global df_app
@@ -249,7 +249,7 @@ def group_mean_byrow():
 
 
 
-def mean_final():
+def mean_final(): #final mean of all images of sample to optimal mean points
     ti = int(imgs_row/mean_el)
     tapp =[]
     tapp1=[]
@@ -320,32 +320,34 @@ def mean_final():
 
 
 
-# Calling groups by order
-print('\nStep 1:')
-df_creating()
-print("\nConcat file created \n\nNow grouping particles by size")
+# Calling methods by order
+
+if __name__ == '__main__':
+    print('\nStep 1:')
+    df_creating()
+    print("\nConcat file created \n\nNow grouping particles by size")
 
 
-print('\nStep 2:')
-df_particle_group()
-print('\nThe grouped excel file created')
+    print('\nStep 2:')
+    df_particle_group()
+    print('\nThe grouped excel file created')
 
 
-print('\nStep 3:')
-group_sort_in_order()
-print('\nThe sorted group file created')
+    print('\nStep 3:')
+    group_sort_in_order()
+    print('\nThe sorted group file created')
 
-print('\nSelection:')
-row_del()
+    print('\nSelection:')
+    row_del()
 
-print('\nStep 4:')
-group_mean_byrow()
-print('\nMean of rows file created')
-
-
-print('\nStep 5:')
-mean_final()
-print('\nFinal mean file created')
+    print('\nStep 4:')
+    group_mean_byrow()
+    print('\nMean of rows file created')
 
 
-input("\nPress enter to exit")
+    print('\nStep 5:')
+    mean_final()
+    print('\nFinal mean file created')
+
+
+    input("\nPress enter to exit")
